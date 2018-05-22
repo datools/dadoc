@@ -8,7 +8,7 @@ import { IController, IControllerOptions, IControllerRoute, IRequestContext } fr
 import { logger } from './../Logger';
 import { ListenersManager } from './ListenersManager';
 
-const log = logger.get('controllers');
+const log = logger.get();
 
 export class RouterControllers {
   private router: Router = new Router();
@@ -38,7 +38,6 @@ export class RouterControllers {
 
       // Add route to routes stack
       for (const route of controllerClass.$routes) {
-        // log(`[Route] ${route}`);
         this.addRoute(
           {
             handler: route.handler,

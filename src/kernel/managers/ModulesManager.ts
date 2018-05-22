@@ -1,6 +1,9 @@
 import { Container, IServiceProvider } from '@datools/di';
 import { IController } from '../index';
 import { IModule } from '../interfaces/IModule';
+import { logger } from './../Logger';
+
+const log = logger.get();
 
 export class ModulesManager {
   private modules: IModule[] = [];
@@ -12,6 +15,8 @@ export class ModulesManager {
     this.modules = this.fetchModules(mainModule);
 
     for (const moduleClass of this.modules) {
+      log(`[Module] ${(moduleClass as any).name}`);
+
       if (!moduleClass.$module) continue;
 
       if (moduleClass.$module.providers) {

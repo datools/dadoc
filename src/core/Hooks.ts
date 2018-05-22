@@ -1,6 +1,6 @@
-import * as debug from 'debug';
+import { logger } from './../kernel/Logger';
 
-const log = debug('@dadoc/core:hooks');
+const log = logger.get();
 
 export class Hooks {
   private hooks: { [name: string]: any[] };

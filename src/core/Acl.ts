@@ -1,8 +1,8 @@
-import * as debug from 'debug';
+import { logger } from './../kernel/Logger';
 import { PermissionNotDefinedError } from './errors/PermissionNotDefined';
 import { RoleNotFoundError } from './errors/RoleNotFound';
 
-const log = debug('@dadoc/core:acl');
+const log = logger.get();
 
 function includesOr(array: string[], ...args: string[]): boolean {
   for (const arg of args) if (array.indexOf(arg) >= 0) return true;

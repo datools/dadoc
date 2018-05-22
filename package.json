@@ -1,13 +1,8 @@
 {
   "name": "@datools/dadoc",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Framework to build Javascript/Typescript JSON API",
-  "keywords": [
-    "framework",
-    "api",
-    "json",
-    "ioc"
-  ],
+  "keywords": ["framework", "api", "json", "ioc"],
   "repository": {
     "git": "https://github.com/datools/dadoc.git"
   },

@@ -1,6 +1,9 @@
 import { Container } from '@datools/di';
 import { Hooks, RouteData } from '../../core';
 import { App, IResolverOptions, ModulesManager } from '../../index';
+import { logger } from './../Logger';
+
+const log = logger.get();
 
 export class ListenersManager {
   private modulesManager: ModulesManager;
@@ -15,6 +18,8 @@ export class ListenersManager {
   public attachListeners() {
     const hooks: Hooks = this.container.get(Hooks);
     for (const listener of this.modulesManager.getListeners()) {
+      log(`[Listener] ${(listener as any).name}`);
+
       const listenerInstance = this.container.get(listener);
       if (listener.$hooks) {
         for (const hookName in listener.$hooks) {

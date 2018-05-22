@@ -2,8 +2,8 @@ import * as debug from 'debug';
 
 export const logger = {
   stack: {},
-  get(namespace: string) {
-    const ns = `dadoc:${namespace}`;
+  get() {
+    const ns = `@datools/dadoc`;
     if (!this.stack[ns]) {
       this.stack[ns] = debug(ns);
     }

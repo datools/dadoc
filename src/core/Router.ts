@@ -1,8 +1,8 @@
-import * as debug from 'debug';
 import * as findMyWay from 'find-my-way';
+import { logger } from './../kernel/Logger';
 import { RouteData } from './RouteData';
 
-const log = debug('@dadoc/core:router');
+const log = logger.get();
 
 export class Router {
   private instance: any;
@@ -17,8 +17,9 @@ export class Router {
     handler: (...args) => any,
     payload?: any,
   ): Router {
-    this.instance.on(methods, path, handler, payload);
     log(`[Route] "${methods} ${path}"`);
+    if (!/^(\/|\*)/.test(path)) path = `/${path}`;
+    this.instance.on(methods, path, handler, payload);
     return this;
   }
 
