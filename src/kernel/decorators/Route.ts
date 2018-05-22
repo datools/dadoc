@@ -5,7 +5,7 @@ export const Route: IHttpRoute = (
   methods: string | string[],
   path: string,
   options?: any,
-): (...args: any[]) => any => {
+): ((...args: any[]) => any) => {
   return (prototype: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const target: IController = prototype.constructor;
     if (!target.$routes) target.$routes = [];

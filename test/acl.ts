@@ -1,6 +1,6 @@
 /* tslint:disable */
 import * as assert from 'assert';
-import { NoValidRoleError, PermissionNotDefinedError } from '../src';
+import { RoleNotFoundError, PermissionNotDefinedError } from '../src';
 
 describe('ACL', function() {
   const userRoles = ['anonymous'];
@@ -13,7 +13,7 @@ describe('ACL', function() {
   it('refuse if needed', function() {
     assert.throws(() => {
       this.acl.check(userRoles, ['private']);
-    }, NoValidRoleError);
+    }, RoleNotFoundError);
   });
 
   it('refuse if permission is not defined', function() {
