@@ -18,6 +18,7 @@ before(async function() {
 
   // Real app
   this.app = new App(TestModule);
+  this.app.applyRouterMiddlware();
   this.request = supertest(this.app.getServer().getInstance());
 });
 

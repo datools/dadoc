@@ -78,9 +78,13 @@ export class App extends Container {
     return this.modulesManager;
   }
 
-  public async start(port: number, hostname?: string): Promise<any> {
+  public applyRouterMiddlware() {
     // Setup router middleware to server
     this.server.use(this.router.getRequestMiddleware());
+  }
+
+  public async start(port: number, hostname?: string): Promise<any> {
+    this.applyRouterMiddlware();
 
     await this.hooks.invoke('app:start', {
       app: this,
