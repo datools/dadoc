@@ -58,9 +58,6 @@ export class App extends Container {
     for (const controller of this.modulesManager.getControllers()) {
       this.router.add(controller);
     }
-
-    // Setup router middleware to server
-    this.server.use(this.router.getRequestMiddleware());
   }
 
   public use(...args: any[]): App {
@@ -82,6 +79,9 @@ export class App extends Container {
   }
 
   public async start(port: number, hostname?: string): Promise<any> {
+    // Setup router middleware to server
+    this.server.use(this.router.getRequestMiddleware());
+
     await this.hooks.invoke('app:start', {
       app: this,
     });
