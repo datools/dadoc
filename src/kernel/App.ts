@@ -1,5 +1,6 @@
 import { Container } from '@datools/di';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import { IncomingMessage, ServerResponse } from 'http';
 import { Hooks, RouteData, Router } from '../core';
 import { ConnectServer, IHttpServer, Request, Response } from '../http';
@@ -36,7 +37,10 @@ export class App extends Container {
       );
 
     // Base middlewares
-    this.server.use(bodyParser.urlencoded({ extended: true })).use(bodyParser.json());
+    this.server
+      .use(cors())
+      .use(bodyParser.urlencoded({ extended: true }))
+      .use(bodyParser.json());
 
     // Create modules manager
     this.modulesManager = new ModulesManager(appModule);
