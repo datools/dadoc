@@ -9,8 +9,13 @@ export class Hooks {
     this.hooks = {};
   }
 
-  public on(name: string, callback: (...args) => any, weight: number = 0): Hooks {
-    if (typeof callback !== 'function') throw new Error('Callback is not a function');
+  public on(
+    name: string,
+    callback: (...args) => any,
+    weight: number = 0,
+  ): Hooks {
+    if (typeof callback !== 'function')
+      throw new Error('Callback is not a function');
 
     if (!this.hooks[name]) this.hooks[name] = [];
 

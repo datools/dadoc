@@ -1,5 +1,7 @@
 export interface IHttpRoute {
-  (methods: string | string[], path: string, options?: any): (...args: any[]) => any;
+  (methods: string | string[], path: string, options?: any): (
+    ...args: any[]
+  ) => any;
   GET?: (path: string, options?: any) => any;
   POST?: (path: string, options?: any) => any;
   PUT?: (path: string, options?: any) => any;

@@ -16,7 +16,11 @@ import { AfterResolver } from '../listeners/AfterResolver';
 })
 @Inject()
 export class ReqResController {
-  constructor(private req: Request, private res: Response, private hooks: Hooks) {}
+  constructor(
+    private req: Request,
+    private res: Response,
+    private hooks: Hooks,
+  ) {}
 
   @Route.POST('/url-encoded')
   urlEncoded() {

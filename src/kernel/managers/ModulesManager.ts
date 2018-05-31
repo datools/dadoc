@@ -21,7 +21,8 @@ export class ModulesManager {
 
       if (moduleClass.$module.providers) {
         for (const service of moduleClass.$module.providers) {
-          if (!this.providers.find(item => item === service)) this.providers.push(service);
+          if (!this.providers.find(item => item === service))
+            this.providers.push(service);
         }
       }
 
@@ -34,7 +35,8 @@ export class ModulesManager {
 
       if (moduleClass.$module.listeners) {
         for (const listener of moduleClass.$module.listeners) {
-          if (!this.listeners.find(item => item === listener)) this.listeners.push(listener);
+          if (!this.listeners.find(item => item === listener))
+            this.listeners.push(listener);
         }
       }
     }

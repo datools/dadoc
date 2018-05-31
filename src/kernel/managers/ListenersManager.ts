@@ -25,9 +25,9 @@ export class ListenersManager {
         for (const hookName in listener.$hooks) {
           if (Array.isArray(listener.$hooks[hookName])) {
             for (const hookOptions of listener.$hooks[hookName]) {
-              const callback: (...args: any[]) => any = listenerInstance[hookOptions.method].bind(
-                listenerInstance,
-              );
+              const callback: (...args: any[]) => any = listenerInstance[
+                hookOptions.method
+              ].bind(listenerInstance);
               hooks.on(hookName, callback, hookOptions.weight);
             }
           }
@@ -50,7 +50,10 @@ export class ListenersManager {
       }
 
       if (controller.class.$resolvers[controller.method]) {
-        resolverStack = [...resolverStack, ...controller.class.$resolvers[controller.method]];
+        resolverStack = [
+          ...resolverStack,
+          ...controller.class.$resolvers[controller.method],
+        ];
       }
 
       resolverStack.sort((a, b) => a.weight - b.weight);

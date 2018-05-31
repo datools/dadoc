@@ -4,7 +4,12 @@ import * as urlJoin from 'url-join';
 import { Hooks, jsonEncode, RouteData, Router } from '../../core';
 import { HttpError, NotFoundError, Request, Response } from '../../http/index';
 import { App, IResolverOptions } from '../../index';
-import { IController, IControllerOptions, IControllerRoute, IRequestContext } from '../index';
+import {
+  IController,
+  IControllerOptions,
+  IControllerRoute,
+  IRequestContext,
+} from '../index';
 import { logger } from './../Logger';
 import { ListenersManager } from './ListenersManager';
 
@@ -29,7 +34,8 @@ export class RouterControllers {
           let parent: IController = opts.parent;
           while (parent) {
             if (parent.$options) {
-              if (parent.$options.prefix) prefix = urlJoin(parent.$options.prefix, prefix);
+              if (parent.$options.prefix)
+                prefix = urlJoin(parent.$options.prefix, prefix);
               parent = parent.$options.parent;
             }
           }
@@ -51,7 +57,10 @@ export class RouterControllers {
     }
   }
 
-  public addRoute(route: IControllerRoute, controller?: IController): RouterControllers {
+  public addRoute(
+    route: IControllerRoute,
+    controller?: IController,
+  ): RouterControllers {
     if (controller) {
       route.options.controller = {
         class: controller,
@@ -68,7 +77,9 @@ export class RouterControllers {
       const { controller } = options;
 
       const callback: (...args: any[]) => any =
-        typeof handler === 'string' ? controller.class.prototype[handler as string] : handler;
+        typeof handler === 'string'
+          ? controller.class.prototype[handler as string]
+          : handler;
 
       this.router.add(methods, path, callback, options);
     }
@@ -109,7 +120,10 @@ export class RouterControllers {
     await this.app.get(Hooks).invoke('app:request', context);
 
     try {
-      const routeData: RouteData = this.router.find(request.method, request.path);
+      const routeData: RouteData = this.router.find(
+        request.method,
+        request.path,
+      );
 
       if (routeData) {
         context.route = routeData;
@@ -123,7 +137,10 @@ export class RouterControllers {
         if (response.raw.finished) return;
 
         // Listeners
-        const listenersManager: ListenersManager = new ListenersManager(this.app, container);
+        const listenersManager: ListenersManager = new ListenersManager(
+          this.app,
+          container,
+        );
 
         // Add listeners
         listenersManager.attachListeners();
@@ -141,7 +158,9 @@ export class RouterControllers {
 
         // Instanciate controller
         const controllerIntance: any = container.get(controller.class);
-        const callback: (...args: any[]) => any = handler.bind(controllerIntance);
+        const callback: (...args: any[]) => any = handler.bind(
+          controllerIntance,
+        );
 
         // Call route callback
         const args: any[] = options.args || [];

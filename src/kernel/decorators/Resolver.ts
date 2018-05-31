@@ -2,7 +2,11 @@ import { IResolverOptions } from '../interfaces';
 
 // tslint:disable-next-line
 export function Resolver(resolver: IResolverOptions): Function {
-  return (classOrProto: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (
+    classOrProto: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor,
+  ) => {
     if (!resolver.args) resolver.args = [];
 
     let target: any = classOrProto;

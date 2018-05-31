@@ -11,7 +11,10 @@ export class App extends Container {
   private modulesManager: ModulesManager;
   private router: RouterControllers;
 
-  constructor(private appModule: any, private server: IHttpServer = new ConnectServer()) {
+  constructor(
+    private appModule: any,
+    private server: IHttpServer = new ConnectServer(),
+  ) {
     super();
 
     this.handleExit();
@@ -112,6 +115,8 @@ export class App extends Container {
 
 const errorContextFactory = dep => {
   return () => {
-    throw new Error(`Cannot resolve ${dep.name || dep} in main container (invalid context)`);
+    throw new Error(
+      `Cannot resolve ${dep.name || dep} in main container (invalid context)`,
+    );
   };
 };

@@ -6,7 +6,11 @@ export const Route: IHttpRoute = (
   path: string,
   options?: any,
 ): ((...args: any[]) => any) => {
-  return (prototype: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (
+    prototype: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor,
+  ) => {
     const target: IController = prototype.constructor;
     if (!target.$routes) target.$routes = [];
     target.$routes.push({
@@ -25,4 +29,5 @@ Route.PATCH = (path: string, options?: any) => Route('PATCH', path, options);
 Route.DELETE = (path: string, options?: any) => Route('DELETE', path, options);
 
 Route.HEAD = (path: string, options?: any) => Route('HEAD', path, options);
-Route.OPTIONS = (path: string, options?: any) => Route('OPTIONS', path, options);
+Route.OPTIONS = (path: string, options?: any) =>
+  Route('OPTIONS', path, options);

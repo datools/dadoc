@@ -30,7 +30,9 @@ export class Acl {
     throwError: boolean = true,
   ): boolean {
     const userRoles: string[] = Array.isArray(roles) ? roles : [roles];
-    const neededPermissions: string[] = Array.isArray(permissions) ? permissions : [permissions];
+    const neededPermissions: string[] = Array.isArray(permissions)
+      ? permissions
+      : [permissions];
 
     for (const perm of neededPermissions) {
       if (perm && typeof perm === 'string') {
@@ -40,12 +42,16 @@ export class Acl {
           if (!Array.isArray(permRoles)) permRoles = [permRoles];
 
           if (!includesOr(permRoles, ...userRoles)) {
-            log(`ACL fail for permissions "${neededPermissions}" with roles "${userRoles}"`);
+            log(
+              `ACL fail for permissions "${neededPermissions}" with roles "${userRoles}"`,
+            );
             if (throwError) throw new RoleNotFoundError(perm);
             return false;
           }
         } else {
-          log(`ACL fail for permissions "${neededPermissions}" with roles "${userRoles}"`);
+          log(
+            `ACL fail for permissions "${neededPermissions}" with roles "${userRoles}"`,
+          );
           if (throwError) throw new PermissionNotDefinedError(perm);
           return false;
         }
